@@ -1,0 +1,18 @@
+﻿@model FoodFinder.Web.Model.Comment
+
+<article class="blog-post">
+    <div class="details"><small>@Model.Created.ToString("D") by @Model.CreatedBy</small></div>
+    <div class="h3">@Model.Title</div>
+    <div class="content">@Model.Details</div>
+    <div>
+        @if (@Model.Likes != 0)
+        {
+            @Model.Likes
+        }
+        else
+        {
+            <a asp-controller="Comment" asp-action="Like" role="button"><span class="glyphicon glyphicon-thums-up"></span></a>
+        }
+    </div>
+
+</article>

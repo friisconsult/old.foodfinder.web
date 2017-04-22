@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FoodFinder.Web.Model;
 using Microsoft.AspNetCore.Mvc;
+using FoodFinder.Web.Model;
 
 namespace FoodFinder.Web.Controllers
 {
@@ -13,18 +15,27 @@ namespace FoodFinder.Web.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Venues()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Discussion()
         {
-            ViewData["Message"] = "Your contact page.";
+            var comment = new Comment
+            {
+                Title = "This is a great post",
+                Details = "Whell the template give me so much inside"
 
-            return View();
+            };
+
+            var comments = new List<Comment>();
+            comments.Add(comment);
+
+            comments.Add(new Comment { Title = "Wow, this is awsom", CreatedBy = "Mr Friis"});
+
+
+            return View(comments);
         }
 
         public IActionResult Error()
