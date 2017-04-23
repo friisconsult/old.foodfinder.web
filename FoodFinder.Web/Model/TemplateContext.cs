@@ -5,6 +5,7 @@ namespace FoodFinder.Web.Model
     public sealed class TemplateContext : DbContext
     {
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Venue> Venues { get; set; }
 
         public TemplateContext(DbContextOptions<TemplateContext> options) : base(options)
         {

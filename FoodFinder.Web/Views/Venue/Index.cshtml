@@ -1,0 +1,26 @@
+﻿@model IEnumerable<FoodFinder.Web.Model.Venue>
+<h1>Venues</h1>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Price level</th>
+		</tr>
+	</thead>
+	@foreach (var venue in Model)
+	{
+		<tbody>
+		<tr data-href="#">
+			<th scope="row" >@Html.ActionLink(venue.Title,"venue","Venue", new{id = venue.Id})</th>
+			<td>@venue.Details</td>
+			<td>na</td>
+		</tr>
+		</tbody>
+	}
+</table>
+@if (User.Identity.IsAuthenticated)
+{
+	<a asp-area="" asp-controller="Venue" asp-action="Create">Create new venue</a>
+}

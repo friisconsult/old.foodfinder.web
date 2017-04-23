@@ -1,21 +1,27 @@
-﻿@model IEnumeraler<FoodFinder.Web.Model.Comment>
+﻿@model IEnumerable<FoodFinder.Web.Model.Comment>
 @{
-    ViewData["Title"] = "Comment";
+    ViewData["Title"] = "Contact";
+    Layout = "_Layout";
 }
 
-<nav >
-    <ul class="pager">
-        <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span>Newer</a></li>
-        <li class="next disabled"><a href="#">Older<span aria-hidden="true">&rarr;</span></a></li>
-    </ul>
+<nav>
+	<ul class="pager">
+		<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span>Newer</a></li>
+		<li class="next disabled"><a href="#">Older<span aria-hidden="true">&rarr;</span></a></li>
+	</ul>
 </nav>
 
 
-<a asp-area="" asp-controller="Comment" asp-action="Create" class="btn btn-primary" role="button">Giv you comment</a>
+<a asp-area="" asp-controller="Comment" asp-action="Create" class="btn btn-primary" role="button">Leave a coment</a>
+
 
 <div class="blog-posts">
-    @foreach (var comment in Model)
-    {
-        @Html.Partial("_Comment",comment)
-    }
+	@foreach (var comment in Model)
+	{
+		@Html.Partial("_Comment",comment);
+	}
 </div>
+
+ 
+
+

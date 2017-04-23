@@ -1,9 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Food Finder</title>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		
+    <title>@ViewData["Title"] - FoodFinder</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -15,7 +17,6 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-
 
     <!-- For old IEs -->
     <link rel="shortcut icon" href="favicon.ico" />
@@ -58,39 +59,42 @@
 
 </head>
 <body>
+		
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
+					
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
-                    <img src="/images/friisconsult.svg" height="30px" alt="Friis Consult ApS"/></a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="/images/friisconsult.svg" height="30px"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Venue" asp-action="Index">Venues</a></li>
                     <li><a asp-area="" asp-controller="Comment" asp-action="Index">Let's talk</a></li>
+				
                 </ul>
-                @if (User.Identity.IsAuthenticated)
+					 @if (User.Identity.IsAuthenticated)
                 {
-                    <li><a asp-controller="Account" asp-action="Logout" class="btn btn-default navbar-btn navbar-right">Logout</a></li>
+                    <a  asp-controller="Account" asp-action="Logout" class="btn btn-default navbar-btn navbar-right">Logout</a>
                 }
                 else
                 {
-                    <li><a asp-controller="Account" asp-action="Login" class="btn btn-default navbar-btn navbar-right">Login</a></li>
+                    <a asp-controller="Account" asp-action="Login" class="btn btn-default navbar-btn navbar-right">Login</a>
                 }
+
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="container">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2017 - Per Friis Consult aps</p>
+        <footer class=" text-center">
+            <p><span class="glyphicon glyphicon-copyright-mark"></span> 2017 - Per Friis Consult ApS </p>
         </footer>
     </div>
 

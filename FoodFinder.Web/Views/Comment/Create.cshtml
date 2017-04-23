@@ -1,0 +1,31 @@
+﻿@model FoodFinder.Web.Model.Comment
+@{
+	Layout = "_Layout";
+}
+
+<h1>Leave your mark on the world</h1>
+<p>
+Be hungry, stay foolish
+</p>
+
+<fieldset>
+	@using (Html.BeginForm())
+	{
+	    @Html.LabelFor(x => x.Title)
+	    @Html.TextBoxFor(c => c.Title, new {@class = "form-control", @placeholder = "The headline of tyou comment"})
+
+	    @Html.LabelFor(x => x.Details, "talk to us")
+	    @Html.TextAreaFor(x => x.Details, new {@class = "form-control", @placeholder = "Please be nice, your welcom to disagree, but please use a sober language"})
+
+	    <p>
+	        <button type="submit" class="pull-right">Leave comment</button>
+	    </p>
+
+	    <p>
+	        Please note: If you have any faule language, or irelevant comment, I reserve the right, to delete your c
+	        omments.<br/>
+	        I'll will leave the comment for a short period, with
+	    </p>
+	}
+
+</fieldset>
