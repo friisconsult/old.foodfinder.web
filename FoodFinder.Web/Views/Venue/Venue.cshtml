@@ -1,4 +1,29 @@
 ﻿@model FoodFinder.Web.Model.Venue
 
 <h1>@Model.Title</h1>
-<p>@Model.Details</p>
+<p>
+    @Model.Details
+</p>
+<div>
+    @Model.PriceLevel
+</div>
+
+<address>
+    @Model.Street <br/>
+    @Model.PostalCode @Model.City <br/>
+    @Model.State <br/>
+    @Model.Country
+</address>
+
+<span class="glyphicon glyphicon-phone"></span>@Model.Phone
+<span class="glyphicon glyphicon-envelope"></span>@Model.Email
+
+
+
+<div class="h2">Menu</div>
+<div class="row table-bordered">
+    <div class="h3 col-xs-12">Main Course</div>
+    <div class="col-xs-10">Name and descripton</div>
+    <div class="col-xs-2">Price</div>
+
+</div>

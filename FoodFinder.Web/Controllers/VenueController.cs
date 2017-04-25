@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using FoodFinder.Web.Model;
 using Newtonsoft.Json;
@@ -25,9 +26,10 @@ namespace FoodFinder.Web.Controllers
 		{
 		    //https://foodfinderapi.azurewebsites.net/api/venues
 
-		    using (HttpClient foodfinderapi = new HttpClient())
+		    using (HttpClient foodFinderAPI = new HttpClient())
 		    {
-		        var response = await foodfinderapi.GetAsync("https://foodfinderapi.azurewebsites.net/api/venues");
+		        foodFinderAPI.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
+		        var response = await foodFinderAPI.GetAsync("https://foodfinderapi.azurewebsites.net/api/venues");
 
 		        if (response.IsSuccessStatusCode)
 		        {
@@ -46,6 +48,7 @@ namespace FoodFinder.Web.Controllers
 		{
 		    using (HttpClient foodFinderAPI = new HttpClient())
 		    {
+		        foodFinderAPI.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
 		        var response = await foodFinderAPI.GetAsync($"https://foodfinderapi.azurewebsites.net/api/venues/{id.ToString()}");
 
 		        if (!response.IsSuccessStatusCode) return NotFound();
@@ -62,25 +65,30 @@ namespace FoodFinder.Web.Controllers
 		{
 			Contract.Ensures(Contract.Result<IActionResult>() != null);
 
-			List<SelectListItem> items = new List<SelectListItem>();
-			items.Add(new SelectListItem { Text = "Choose...", Value = "Other" });
-//			foreach (FoodType val in Enum.GetValues(typeof(FoodType)))
-//			{
-//				items.Add(new SelectListItem { Text = val.ToString(), Value = val.ToString() });
-//			}
-
-			//items.Add(new SelectListItem{Text = "fast"});
-			ViewBag.FoodType = items;
+			//ViewBag.FoodType = items;
 			return View();
 		}
 
 		[HttpPost, Route("create")]
-		public IActionResult CreateVenue(Venue venue)
+		public async Task<IActionResult> CreateVenue(Venue venue)
 		{
-			_db.Venues.Add(venue);
-			_db.SaveChanges();
 
-			return RedirectToAction("Index", "venue");
-		}
+		    using (var foodFinderAPI = new HttpClient())
+		    {
+		        var jsonString = JsonConvert.SerializeObject(venue);
+		        var stringContext = new StringContent(jsonString,Encoding.UTF8,"application/json");
+
+                foodFinderAPI.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+		        foodFinderAPI.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
+		        var response = await foodFinderAPI.PostAsync("https://foodfinderapi.azurewebsites.net/api/venues", stringContext);
+
+		        if (response.IsSuccessStatusCode)
+		            return RedirectToAction("Index");
+
+
+		    }
+
+		    return Ok();
+        }
 	}
 }

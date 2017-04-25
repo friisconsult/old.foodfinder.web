@@ -3,58 +3,55 @@
 <fieldset>
 	@using (Html.BeginForm())
 	{
-	<div class="form-group"> 
+	<div >
 		@Html.LabelFor(x => x.Title,"name")
 		@Html.TextBoxFor(x => x.Title,new {@class="form-control", @type="text", @placeholder="name"})
 
 	</div>
-	
+
 	<div class="form-group">
 
 
-		@Html.DropDownListFor<SelectListItem>(x => x.FoodType,
-			new List<SelectListItem> { 
-				new SelectListItem { Value = "0" , Text = "Other"},
-				new SelectListItem { Value = "1" , Text = "FastFood"},
-				new SelectListItem { Value = "2" , Text = "Indian"},
-				new SelectListItem { Value = "3" , Text = "Mexican"},
-				new SelectListItem { Value = "4" , Text = "French"},
-				new SelectListItem { Value = "5" , Text = "MiddelEast"},
-				new SelectListItem { Value = "6" , Text = "African"},
-				new SelectListItem { Value = "7" , Text = "European"},
-				new SelectListItem { Value = "8" , Text = "American"},
-				new SelectListItem { Value = "9" , Text = "Vegetarian"},
-				new SelectListItem { Value = "10" , Text = "LocalFood"}
-			},
-		new { @class="form-control"})
-		
+	    @Html.DropDownListFor(x => x.Type,
+	        new List<SelectListItem> {
+	            new SelectListItem { Value = "0" , Text = "Other"},
+	            new SelectListItem { Value = "1" , Text = "FastFood"},
+	            new SelectListItem { Value = "2" , Text = "Indian"},
+	            new SelectListItem { Value = "3" , Text = "Mexican"},
+	            new SelectListItem { Value = "4" , Text = "French"},
+	            new SelectListItem { Value = "5" , Text = "MiddelEast"},
+	            new SelectListItem { Value = "6" , Text = "African"},
+	            new SelectListItem { Value = "7" , Text = "European"},
+	            new SelectListItem { Value = "8" , Text = "American"},
+	            new SelectListItem { Value = "9" , Text = "Vegetarian"},
+	            new SelectListItem { Value = "10" , Text = "LocalFood"}
+	        })
+	</div>
 
-	</div>
-	
-	<div class="form-group"> 
+	<div class="form-group">
 		@Html.LabelFor(x => x.PriceLevel,"price level")
-		@Html.TextBoxFor(x => x.PriceLevel, new {@class="form-control",@placeholder="price level"})
+		@Html.TextBoxFor(x => x.PriceLevel, new {@class="form-control", @placeholder="price level"})
 	</div>
-	
-	<div class="form-group"> 
+
+	<div class="form-group">
 		@Html.LabelFor(x => x.Street, "address")
 		@Html.TextBoxFor(x => x.Street, new {@class="form-control", @placeholder="street"})
 		@Html.TextBoxFor(x => x.PostalCode, new {@class="form-control", @placeholder="postal code"})
-		@Html.TextBoxFor(x => x.City, new {@class="form-control", @placeholder="city"})
+		@Html.TextBoxFor(x => x.City, new {@class="form-control",  @placeholder="city"})
 		@Html.TextBoxFor(x => x.State, new {@class="form-control", @placeholder="state"})
 		@Html.TextBoxFor(x => x.Country, new{@class="form-control" ,@placeholder="country"})
 	</div>
 
 	<div class="form-group">
 		@Html.LabelFor(x => x.Email,"email")
-		@Html.TextBoxFor(x => x.Email,new {@class="form-control", @placeholder="email"})
+		@Html.TextBoxFor(x => x.Email,new {@class="form-control",  @placeholder="email"})
 		@Html.LabelFor(x => x.Phone,"phone with country extention")
-		@Html.TextBoxFor(x => x.Phone, new {@class="form-control", @placeholder="phone"})
-	</div> 
+		@Html.TextBoxFor(x => x.Phone, new {@class="form-control",  @placeholder="phone"})
+	</div>
 
 	<div class="form-group">
-		@Html.LabelFor(x => x.Description,"About the venue")
-		@Html.TextAreaFor(x => x.Description,new {@class="form-control"})
+		@Html.LabelFor(x => x.Details,"About the venue")
+		@Html.TextAreaFor(x => x.Details,new {@class="form-control"})
 	</div>
 	<p>
 		<button type="submit" class="pull-right">Save</button>
