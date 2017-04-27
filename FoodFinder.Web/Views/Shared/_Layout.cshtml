@@ -91,7 +91,7 @@
                 </ul>
 					 @if (User.Identity.IsAuthenticated)
                 {
-                    <a  asp-controller="Account" asp-action="Logout" class="btn btn-default navbar-btn navbar-right">Logout</a>
+                    <a  asp-controller="Account" asp-action="Logout" class="btn btn-default navbar-btn navbar-right">Logout **@User.Identity.Name**</a>
                 }
                 else
                 {

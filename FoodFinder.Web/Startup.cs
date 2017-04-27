@@ -160,6 +160,8 @@ namespace FoodFinder.Web
             };
             options.Scope.Clear();
             options.Scope.Add("openid");
+            options.Scope.Add("name");
+
             app.UseOpenIdConnectAuthentication(options);
 
 

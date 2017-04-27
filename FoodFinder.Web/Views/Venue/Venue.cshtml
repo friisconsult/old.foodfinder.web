@@ -1,5 +1,6 @@
 ﻿@model FoodFinder.Web.Model.Venue
 
+<div class="container">
 <h1>@Model.Title</h1>
 <p>
     @Model.Details
@@ -10,20 +11,95 @@
 
 <address>
     @Model.Street <br/>
-    @Model.PostalCode @Model.City <br/>
+    @Model.PostacCode @Model.City <br/>
     @Model.State <br/>
     @Model.Country
 </address>
 
-<span class="glyphicon glyphicon-phone"></span>@Model.Phone
+<span class="glyphicon glyphicon-phone"></span>@Model.PHone
 <span class="glyphicon glyphicon-envelope"></span>@Model.Email
 
 
 
 <div class="h2">Menu</div>
-<div class="row table-bordered">
-    <div class="h3 col-xs-12">Main Course</div>
-    <div class="col-xs-10">Name and descripton</div>
-    <div class="col-xs-2">Price</div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Namer</th>
+            <th>Price</th>
+        </tr>
+        <tr>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var menuItem in @Model.MenuItems)
+        {
+            <tr>
+                <td>@menuItem.Title</td>
+                <td>@menuItem.Price</td>
+            </tr>
+            <tr>
+                <td>@menuItem.Details</td>
+
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    @foreach (var review in @Model.Reviews)
+    {
+
+        <blockquote class="blockquote">
+            <div class="h3 ">@review.Title <small>
+                @if (@review.Stars >= 1)
+                {
+                    <span class="glyphicon glyphicon-star"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                }
+                @if (@review.Stars >= 2)
+                {
+                    <span class="glyphicon glyphicon-star"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                }
+                @if (@review.Stars >= 3)
+                {
+                    <span class="glyphicon glyphicon-star"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                }
+                @if (@review.Stars >= 4)
+                {
+                    <span class="glyphicon glyphicon-star"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                }
+                @if (@review.Stars >= 5)
+                {
+                    <span class="glyphicon glyphicon-star"></span>
+                }
+                else
+                {
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                }
+                </small>
+            </div>
+
+            <p>@review.Details</p>
+            <footer >@review.Author</footer>
+
+        </blockquote>
+    }
 
 </div>

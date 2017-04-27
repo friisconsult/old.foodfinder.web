@@ -24,7 +24,7 @@ namespace FoodFinder.Web.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-		    //https://foodfinderapi.azurewebsites.net/api/venues
+
 
 		    using (HttpClient foodFinderAPI = new HttpClient())
 		    {
@@ -35,6 +35,11 @@ namespace FoodFinder.Web.Controllers
 		        {
 		            var jsonString =  await response.Content.ReadAsStringAsync();
 		            var venues = JsonConvert.DeserializeObject < Venue[]>(jsonString);
+
+
+
+
+
 		            return View(venues);
 		        }
 		    }
@@ -55,6 +60,25 @@ namespace FoodFinder.Web.Controllers
 
 		        var jsonString = await response.Content.ReadAsStringAsync();
 		        var venue = JsonConvert.DeserializeObject<Venue>(jsonString);
+
+		        var menuResponse =
+		            await foodFinderAPI.GetAsync($"https://foodfinderapi.azurewebsites.net/api/menuitem/menu/{venue.Id.ToString()}");
+
+		        if (menuResponse.IsSuccessStatusCode)
+		        {
+		            var memuItemsJson = await menuResponse.Content.ReadAsStringAsync();
+		            venue.MenuItems = JsonConvert.DeserializeObject<MenuItem[]>(memuItemsJson);
+
+		        }
+
+		        var reviewresponse = await foodFinderAPI.GetAsync(
+		            $"https://foodfinderapi.azurewebsites.net/api/reviews/venue/{venue.Id.ToString()}");
+		        if (reviewresponse.IsSuccessStatusCode)
+		        {
+		            var reviewsJson = await reviewresponse.Content.ReadAsStringAsync();
+		            venue.Reviews = JsonConvert.DeserializeObject<Review[]>(reviewsJson);
+		        }
+
 		        return View(venue);
 		    }
 			return NotFound();
@@ -72,7 +96,6 @@ namespace FoodFinder.Web.Controllers
 		[HttpPost, Route("create")]
 		public async Task<IActionResult> CreateVenue(Venue venue)
 		{
-
 		    using (var foodFinderAPI = new HttpClient())
 		    {
 		        var jsonString = JsonConvert.SerializeObject(venue);

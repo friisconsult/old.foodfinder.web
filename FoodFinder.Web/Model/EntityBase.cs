@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace FoodFinder.Web.Model
 {
@@ -12,11 +13,7 @@ namespace FoodFinder.Web.Model
         public DateTime Updated { get; set; }
         public string UpdatedBy { get; set; }
 
-        public EntityBase()
-        {
-            Created = DateTime.UtcNow;
 
-            Updated = DateTime.UtcNow;
-        }
+
     }
 }
