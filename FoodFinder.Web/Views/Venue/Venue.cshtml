@@ -3,7 +3,7 @@
 <div class="container">
 <h1>@Model.Title</h1>
 <p>
-    @Model.Details
+    @Model.Detail
 </p>
 <div>
     @Model.PriceLevel
@@ -11,12 +11,12 @@
 
 <address>
     @Model.Street <br/>
-    @Model.PostacCode @Model.City <br/>
+    @Model.ZipCode @Model.City <br/>
     @Model.State <br/>
     @Model.Country
 </address>
 
-<span class="glyphicon glyphicon-phone"></span>@Model.PHone
+<span class="glyphicon glyphicon-phone"></span>@Model.Phone
 <span class="glyphicon glyphicon-envelope"></span>@Model.Email
 
 
@@ -41,7 +41,7 @@
                 <td>@menuItem.Price</td>
             </tr>
             <tr>
-                <td>@menuItem.Details</td>
+                <td>@menuItem.Detail</td>
 
             </tr>
         }
@@ -96,7 +96,7 @@
                 </small>
             </div>
 
-            <p>@review.Details</p>
+            <p>@review.Detail</p>
             <footer >@review.Author</footer>
 
         </blockquote>

@@ -45,17 +45,8 @@ namespace FoodFinder.Web
             // Setup database
             services.AddDbContext<TemplateContext>(options =>
             {
-                if (Env.IsDevelopment())
-                    options.UseSqlite("Data Source=Venue.db");
-                else
-                {
-                    var connectionString = Configuration.GetConnectionString("MS_TableConnectionString"); //    Configuration["DefaultConnection"];
-                    if (string.IsNullOrEmpty(connectionString))
-                    {
-                        throw (new Exception("Connection string is not defined"));
-                    }
-                    options.UseSqlServer(connectionString);
-                }
+                options.UseSqlite("Data Source=Discussion.db");
+
             });
 
             services.AddAuthentication(x => x.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);

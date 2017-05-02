@@ -2,9 +2,9 @@
 
 
 <article class="blog-post">
-    <div class="h3 ">@Model.Title<div class="details pull-right"><small>@Model.Created.ToString("D") by @Model.CreatedBy</small></div></div>
+    <div class="h3 ">@Model.Title<div class="pull-right"><small>@Model.Created.ToString("D") by @Model.CreatedBy</small></div></div>
 
-	<div class="content">@Model.Details</div>
+	<div class="content">@Model.Detail</div>
 	<div>@if (@Model.Likes != 0) 
 		{
 		 @Model.Likes

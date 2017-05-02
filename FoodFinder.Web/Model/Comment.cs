@@ -1,8 +1,16 @@
-﻿namespace FoodFinder.Web.Model
+﻿using System;
+
+namespace FoodFinder.Web.Model
 {
-    public class Comment:EntityBase
+    public class Comment
     {
-        public int Likes { get; set; }
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+        public string Detail { get; set; }
+        public DateTime Created { get; set; } = DateTime.UtcNow;
+        public string CreatedBy { get; set; }
+
+        public int Likes { get; set; } = 0;
 
     }
 }

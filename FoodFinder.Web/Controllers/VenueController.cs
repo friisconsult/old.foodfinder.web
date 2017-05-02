@@ -98,8 +98,11 @@ namespace FoodFinder.Web.Controllers
 		{
 		    using (var foodFinderAPI = new HttpClient())
 		    {
-		        var jsonString = JsonConvert.SerializeObject(venue);
+		        var venues = new Venue[] {venue};
+
+		        var jsonString = JsonConvert.SerializeObject(venues);
 		        var stringContext = new StringContent(jsonString,Encoding.UTF8,"application/json");
+                Console.WriteLine(jsonString);
 
                 foodFinderAPI.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 		        foodFinderAPI.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
