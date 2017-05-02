@@ -1,5 +1,4 @@
-﻿using System;
-namespace FoodFinder.Web.Authentication
+﻿namespace FoodFinder.Web.Authentication
 {
 
 	public class Auth0Settings

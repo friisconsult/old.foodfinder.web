@@ -1,8 +1,5 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Net.Http;
@@ -24,26 +21,19 @@ namespace FoodFinder.Web.Controllers
 
 		public async Task<IActionResult> Index()
 		{
-
-
-		    using (HttpClient foodFinderAPI = new HttpClient())
+            using (var foodFinderApi = new HttpClient())
 		    {
-		        foodFinderAPI.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
-		        var response = await foodFinderAPI.GetAsync("https://foodfinderapi.azurewebsites.net/api/venues");
+		        foodFinderApi.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
+		        var response = await foodFinderApi.GetAsync("https://foodfinderapi.azurewebsites.net/api/venues");
 
 		        if (response.IsSuccessStatusCode)
 		        {
 		            var jsonString =  await response.Content.ReadAsStringAsync();
 		            var venues = JsonConvert.DeserializeObject < Venue[]>(jsonString);
 
-
-
-
-
 		            return View(venues);
 		        }
 		    }
-
 
 			return View(_db.Venues.Take(10).ToList());
 		}
@@ -51,10 +41,10 @@ namespace FoodFinder.Web.Controllers
 		[Route("{id}")]
 		public async Task<IActionResult> Venue(Guid id)
 		{
-		    using (HttpClient foodFinderAPI = new HttpClient())
+		    using (var foodFinderApi = new HttpClient())
 		    {
-		        foodFinderAPI.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
-		        var response = await foodFinderAPI.GetAsync($"https://foodfinderapi.azurewebsites.net/api/venues/{id.ToString()}");
+		        foodFinderApi.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
+		        var response = await foodFinderApi.GetAsync($"https://foodfinderapi.azurewebsites.net/api/venues/{id.ToString()}");
 
 		        if (!response.IsSuccessStatusCode) return NotFound();
 
@@ -62,7 +52,7 @@ namespace FoodFinder.Web.Controllers
 		        var venue = JsonConvert.DeserializeObject<Venue>(jsonString);
 
 		        var menuResponse =
-		            await foodFinderAPI.GetAsync($"https://foodfinderapi.azurewebsites.net/api/menuitem/menu/{venue.Id.ToString()}");
+		            await foodFinderApi.GetAsync($"https://foodfinderapi.azurewebsites.net/api/menuitem/menu/{venue.Id.ToString()}");
 
 		        if (menuResponse.IsSuccessStatusCode)
 		        {
@@ -71,13 +61,13 @@ namespace FoodFinder.Web.Controllers
 
 		        }
 
-		        var reviewresponse = await foodFinderAPI.GetAsync(
+		        var reviewresponse = await foodFinderApi.GetAsync(
 		            $"https://foodfinderapi.azurewebsites.net/api/reviews/venue/{venue.Id.ToString()}");
-		        if (reviewresponse.IsSuccessStatusCode)
-		        {
-		            var reviewsJson = await reviewresponse.Content.ReadAsStringAsync();
-		            venue.Reviews = JsonConvert.DeserializeObject<Review[]>(reviewsJson);
-		        }
+
+		        if (!reviewresponse.IsSuccessStatusCode) return View(venue);
+
+		        var reviewsJson = await reviewresponse.Content.ReadAsStringAsync();
+		        venue.Reviews = JsonConvert.DeserializeObject<Review[]>(reviewsJson);
 
 		        return View(venue);
 		    }
@@ -96,7 +86,7 @@ namespace FoodFinder.Web.Controllers
 		[HttpPost, Route("create")]
 		public async Task<IActionResult> CreateVenue(Venue venue)
 		{
-		    using (var foodFinderAPI = new HttpClient())
+		    using (var foodFinderApi = new HttpClient())
 		    {
 		        var venues = new Venue[] {venue};
 
@@ -104,9 +94,9 @@ namespace FoodFinder.Web.Controllers
 		        var stringContext = new StringContent(jsonString,Encoding.UTF8,"application/json");
                 Console.WriteLine(jsonString);
 
-                foodFinderAPI.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-		        foodFinderAPI.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
-		        var response = await foodFinderAPI.PostAsync("https://foodfinderapi.azurewebsites.net/api/venues", stringContext);
+                foodFinderApi.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+		        foodFinderApi.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
+		        var response = await foodFinderApi.PostAsync("https://foodfinderapi.azurewebsites.net/api/venues", stringContext);
 
 		        if (response.IsSuccessStatusCode)
 		            return RedirectToAction("Index");
