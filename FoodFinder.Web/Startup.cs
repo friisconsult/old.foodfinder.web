@@ -41,7 +41,10 @@ namespace FoodFinder.Web
             // Setup database
             services.AddDbContext<TemplateContext>(options =>
             {
-                options.UseSqlite("Data Source=Discussion.db");
+                if (Env.IsDevelopment())
+                    options.UseSqlite("Data Source=Discussion.db");
+                else
+                    options.UseSqlServer(Configuration.GetConnectionString("MS_TableConnectionString"));
 
             });
 
