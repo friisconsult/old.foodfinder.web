@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using FoodFinder.Web.Authentication;
 using FoodFinder.Web.Model;
 using Microsoft.AspNetCore.Authorization;
 
@@ -60,7 +61,8 @@ namespace FoodFinder.Web.Controllers
 		[HttpPost, Route("create")]
 		public IActionResult Create(Comment comment)
 		{
-			comment.CreatedBy = User.Identity.Name;
+			comment.CreatedBy = User.GetNickName();
+			comment.Owner = User.GetUserId();
 			comment.Created = DateTime.Now;
 
 			_db.Comments.Add(comment);

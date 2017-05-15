@@ -26,6 +26,7 @@ namespace FoodFinder.Web.Model
 
         public  ICollection<MenuItem> MenuItems { get; set; }
         public   ICollection<Review> Reviews { get; set; }
+        public string Owner { get; set; }
     }
 
     public enum FoodType

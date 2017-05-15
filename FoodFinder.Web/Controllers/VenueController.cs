@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using FoodFinder.Web.Authentication;
 using FoodFinder.Web.Model;
 using Newtonsoft.Json;
 
@@ -88,11 +89,13 @@ namespace FoodFinder.Web.Controllers
 		{
 		    using (var foodFinderApi = new HttpClient())
 		    {
+			    venue.Owner = User.GetUserId();
 		        var venues = new Venue[] {venue};
+
 
 		        var jsonString = JsonConvert.SerializeObject(venues);
 		        var stringContext = new StringContent(jsonString,Encoding.UTF8,"application/json");
-                Console.WriteLine(jsonString);
+
 
                 foodFinderApi.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 		        foodFinderApi.DefaultRequestHeaders.Add("FC-APPLICATION-KEY", "Agrajag");
