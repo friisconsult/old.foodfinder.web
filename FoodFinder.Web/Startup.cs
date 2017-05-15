@@ -146,8 +146,8 @@ namespace FoodFinder.Web
                 }
             };
             options.Scope.Clear();
-            options.Scope.Add("openid");
-            options.Scope.Add("name");
+            options.Scope.Add("openid profile");
+            options.Scope.Add("venueid");
 
             app.UseOpenIdConnectAuthentication(options);
 

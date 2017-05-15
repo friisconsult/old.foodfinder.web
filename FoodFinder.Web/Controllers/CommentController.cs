@@ -66,7 +66,7 @@ namespace FoodFinder.Web.Controllers
 			_db.Comments.Add(comment);
 			_db.SaveChanges();
 
-			return RedirectToAction("Index", "comment", comment.Id);
+			return RedirectToAction($"Index", $"comment", comment.Id);
 		}
 	}
 }

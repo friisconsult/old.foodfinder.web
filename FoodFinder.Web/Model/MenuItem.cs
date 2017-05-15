@@ -8,6 +8,7 @@ namespace FoodFinder.Web.Model
 
         public string Title { get; set; }
         public string Detail { get; set; }
+        public bool Deleted { get; set; }
 
         public MenuItemType Type { get; set; }
         public double Price { get; set; }
