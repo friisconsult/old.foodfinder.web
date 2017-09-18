@@ -87,9 +87,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Features" asp-action="Index">Fetures</a></li>
                     <li><a asp-area="" asp-controller="Venue" asp-action="Index">Venues</a></li>
                     <li><a asp-area="" asp-controller="Comment" asp-action="Index">Let's talk</a></li>
-				
+
                 </ul>
 					 @if (User.Identity.IsAuthenticated)
                 {
