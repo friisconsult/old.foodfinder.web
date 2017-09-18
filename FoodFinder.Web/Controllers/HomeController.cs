@@ -32,8 +32,6 @@ namespace FoodFinder.Web.Controllers
 		        new Comment {Detail = "Wow, this is awsom", Created = DateTime.Now.AddDays(-2), CreatedBy = "Hr Friis"}
 		    };
 
-
-
 		    return View(comments);
 		}
 

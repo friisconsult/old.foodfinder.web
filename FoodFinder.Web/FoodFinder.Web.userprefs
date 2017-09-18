@@ -1,0 +1,18 @@
+﻿<Properties StartupConfiguration="{ACD39503-9A75-4FA8-A709-3C00D5219E1A}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Startup.cs">
+    <Files>
+      <File FileName="Startup.cs" Line="23" Column="48" />
+      <File FileName="appsettings.json" Line="14" Column="88" />
+      <File FileName="appsettings.Development.json" Line="14" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/perfriis/Developer/foodfinder.web/FoodFinder.Web/Startup.cs" relfile="Startup.cs" line="77" column="130" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.FoodFinder.Web PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>
